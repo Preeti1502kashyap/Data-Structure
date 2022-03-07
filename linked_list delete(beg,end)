@@ -1,0 +1,137 @@
+#include<iostream>
+using namespace std;
+struct node
+{
+    int id;
+    node *link;
+};
+node *ptr,*START;
+
+void create_list();
+void display_list();
+
+void del_beg();
+void del_end();
+
+int main()
+{
+    int c,item;
+    char ch;
+level:
+    cout<<"1.Create List\n2.Display list"<<endl;
+    cout<<"3.Delete begining item\n4.Delete end item"<<endl;
+    cout<<"Please choose any operation:";
+    cin>>c;
+    switch(c)
+    {
+    case 1:
+        create_list();
+        break;
+    case 2:
+        display_list();
+        break;
+
+    case 3:
+        del_beg();
+        break;
+    case 4:
+        del_end();
+        break;
+    default:
+        cout<<"Selected option is invalid...";
+    }
+    cout<<"\nDo you want to do another operation?(press y if yes):-";
+    cin>>ch;
+    if(ch=='Y'||ch=='y')
+    {
+        goto level;
+    }
+    return 0;
+}
+void create_list()
+{
+    if(START!=NULL)
+    {
+        cout<<"List is already exist..."<<endl;
+    }
+    else
+    {
+        int item,n;
+        cout<<"Enter total nummber of nodes:-";
+        cin>>n;
+        ptr=new node;
+        START=ptr;
+        for(int i=1; i<=n; i++)
+        {
+            cout<<"Enter employee id "<<i<<" of list item:-";
+            cin>>item;
+            ptr->id=item;
+            if(i==n)
+                ptr->link=NULL;
+            else
+                ptr->link=new node;
+            ptr=ptr->link;
+        }
+    }
+}
+void display_list()
+{
+    ptr=START;
+    if(ptr==NULL)
+    {
+        cout<<"The list is empty...";
+    }
+    else
+    {
+        while(ptr!=NULL)
+        {
+            cout<<"\t"<<ptr->id;
+            ptr=ptr->link;
+        }
+    }
+}
+void del_beg()
+{
+    if(START==NULL)
+    {
+        cout<<"The list is empty..."<<endl;
+        return;
+    }
+    else
+    {
+        ptr = START;
+        START = START ->link;
+        cout<<"The first employee "<<ptr->id<<" is deleted"<<endl;
+        free(ptr);
+        return;
+    }
+}
+void del_end()
+{
+    node *loc;
+    if(START==NULL)
+    {
+        cout<<"The list is empty..."<<endl;
+        return;
+    }
+    else if(START->link==NULL)
+    {
+        ptr = START;
+        START = NULL;
+        cout<<"The node is deleted"<<endl;
+        free(ptr);
+    }
+    else
+    {
+        loc=START;        // Address of first node
+        ptr=START->link;   // Address of second node
+        while(ptr->link!=NULL)
+        {
+            loc=ptr;
+            ptr=ptr->link;
+        }
+        loc->link = NULL;
+        cout<<"The last employee is deleted"<<endl;
+        return;
+    }
+}
