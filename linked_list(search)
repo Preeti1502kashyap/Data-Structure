@@ -1,0 +1,116 @@
+#include<iostream>
+using namespace std;
+struct node
+{
+    int rollno;
+    node *link;
+};
+node *ptr,*START;
+
+void create_list();
+void display_list();
+void search_roll(int);
+
+int main()
+{
+    int c,roll;
+    char ch;
+level:
+    cout<<"1.Create List\n2.Display list\n3.Search any roll no in list"<<endl;
+    cout<<"Please choose any operation:";
+    cin>>c;
+    switch(c)
+    {
+    case 1:
+        create_list();
+        break;
+    case 2:
+        display_list();
+        break;
+    case 3:
+        cout<<"Enter roll no that you want to search:-";
+        cin>>roll;
+        search_roll(roll);
+        break;
+    default:
+        cout<<"Selected option is invalid...";
+    }
+    cout<<"\nDo you want to do another operation?(press y if yes):-";
+    cin>>ch;
+    if(ch=='Y'||ch=='y')
+    {
+        goto level;
+    }
+    return 0;
+}
+void create_list()
+{
+    if(START!=NULL)
+    {
+        cout<<"List is already exist..."<<endl;
+    }
+    else
+    {
+        int roll,n;
+        cout<<"Enter total nummber of students:-";
+        cin>>n;
+        ptr=new node;
+        START=ptr;
+        for(int i=1; i<=n; i++)
+        {
+            cout<<"Enter "<<i<<" student roll no:-";
+            cin>>roll;
+            ptr->rollno=roll;
+            if(i==n)
+                ptr->link=NULL;
+            else
+                ptr->link=new node;
+            ptr=ptr->link;
+        }
+    }
+}
+void display_list()
+{
+    ptr=START;
+    if(ptr==NULL)
+    {
+        cout<<"The list is empty...";
+    }
+    else
+    {
+        int c=0;
+        while(ptr!=NULL)
+        {
+            cout<<(++c)<<" student roll no is "<<ptr->rollno<<endl;
+            ptr=ptr->link;
+        }
+    }
+}
+
+void search_roll(int roll)
+{
+    ptr=START;
+    int p=0;
+    if(ptr==NULL)
+    {
+        cout<<"The list is empty...";
+    }
+    else
+    {
+        while(ptr!=NULL)
+        {
+            p++;
+            if(ptr->rollno==roll)
+            {
+                cout<<roll<<" roll no is available at position "<<p;
+                p=0;
+                break;
+            }
+            ptr=ptr->link;
+        }
+        if(p!=0)
+        {
+            cout<<roll<<" roll no is not available in this list...";
+        }
+    }
+}
