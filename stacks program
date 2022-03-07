@@ -1,0 +1,73 @@
+#include<iostream>
+using namespace std;
+#define SIZE 5
+int arr[SIZE];
+int top=-1;
+
+bool isempty()
+{
+	if(top==-1)
+		return true;
+	else
+		return false;
+}
+void push(int value)
+{
+	if(top==SIZE-1)
+	{
+		cout<<"stack is full \n";
+	}
+	else
+	{
+		top++;
+		arr[top]=value;
+	}
+}
+void pop()
+{
+    if(isempty())
+    {
+        cout<<"stack is empty \n ";
+    }
+    else
+        top--;
+}
+
+void displayStack()
+{
+	if(isempty())
+	{
+		cout<<"stack is empty \n";
+	}
+	else
+	{
+		for(int i=0; i<=top; i++)
+			cout<<arr[i]<<" ";
+	}
+}
+void show_top()
+{
+    if(isempty())
+	{
+		cout<<"stack is empty \n";
+	}
+	else{
+        cout<<"Element at top is:"<<arr[top]<<"\n";
+	}
+
+}
+int main()
+{
+	/* code */
+	push(2);
+	push(3);
+	push(4);
+	push(5);
+	push(6);
+
+    pop();
+    pop();
+    displayStack();
+    show_top();
+	return 0;
+}
