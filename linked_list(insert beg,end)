@@ -1,0 +1,132 @@
+#include<iostream>
+using namespace std;
+struct node
+{
+    int rollno;
+    node *link;
+};
+node *ptr,*START;
+
+void create_list();
+void display_list();
+void insert_beg(int);
+void insert_end(int);
+
+int main()
+{
+    int c,roll,loc;
+    char ch;
+level:
+    cout<<"1.Create List\n2.Display list\n3.insert list\n4. Insert at end"<<endl;
+    cout<<"Please choose any operation:";
+    cin>>c;
+    switch(c)
+    {
+    case 1:
+        create_list();
+        break;
+    case 2:
+        display_list();
+        break;
+    /*case 3:
+        cout<<"Enter roll no that you want to search:-";
+        cin>>roll;
+        search_roll(roll);
+        break;*/
+    case 3:
+        cout<<"enter element that you want to insert:-";
+        cin>>roll;
+        insert_beg(roll);
+        break;
+    case 4:
+        cout<<"Enter the item you want to insert the element:";
+        cin>>roll;
+        insert_end(roll);
+        break;
+    default:
+        cout<<"Selected option is invalid...";
+    }
+    cout<<"\nDo you want to do another operation?(press y if yes):-";
+    cin>>ch;
+    if(ch=='Y'||ch=='y')
+    {
+        goto level;
+    }
+    return 0;
+}
+void create_list()
+{
+    if(START!=NULL)
+    {
+        cout<<"List is already exist..."<<endl;
+    }
+    else
+    {
+        int roll,n;
+        cout<<"Enter total nummber of students:-";
+        cin>>n;
+        ptr=new node;
+        START=ptr;
+        for(int i=1; i<=n; i++)
+        {
+            cout<<"Enter "<<i<<" student roll no:-";
+            cin>>roll;
+            ptr->rollno=roll;
+            if(i==n)
+                ptr->link=NULL;
+            else
+                ptr->link=new node;
+            ptr=ptr->link;
+        }
+    }
+}
+void display_list()
+{
+    ptr=START;
+    if(ptr==NULL)
+    {
+        cout<<"The list is empty...";
+    }
+    else
+    {
+        int c=0;
+        while(ptr!=NULL)
+        {
+            cout<<(++c)<<" student roll no is "<<ptr->rollno<<endl;
+            ptr=ptr->link;
+        }
+    }
+}
+void  insert_beg(int roll )
+{
+
+    node *ptr;
+    ptr=new node;
+    ptr->rollno=roll;
+    if(START==NULL)
+    {
+    ptr->link=NULL;
+    }
+    else
+    ptr->link=START;
+    START=ptr;
+    return;
+}
+void insert_end(int roll)
+{
+    node *ptr,*loc;
+    ptr=new node;
+    ptr->rollno=roll;
+    ptr->link=NULL;
+    if(START==NULL)
+    {
+START=ptr;
+    }
+    else
+        loc=START;
+        while(loc->link!=NULL)
+            loc=loc->link;
+        loc->link=ptr;
+
+    return;
+}
