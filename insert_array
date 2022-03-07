@@ -1,0 +1,42 @@
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    int i,n,p,e;
+    cout<<"enter the size of array:";
+    cin>>n;
+    int arr[n];
+    cout<<"enter the elements of array:";
+    for(i=0;i<=n;i++)
+    {
+        cin>>arr[i];
+
+    }
+    cout<<" traversing of array:";
+    for(i=0;i<=n;i++)
+    {
+        cout<<"\n";
+        cout<<"arr["<<i<<"]:"<<arr[i];
+    }
+    n=n+1;
+    cout<<"enter the element to insert";
+    cin>>e;
+    cout<<"enter the place where to insert:";
+    cin>>p;
+    if(p<n)
+    {
+        for(i=n;i>=p;i--)
+        {
+            arr[i+1]=arr[i];
+        }
+        arr[p]=e;
+        cout<<"array after insertion is \n"<<endl;
+
+        for(i=0;i<=n;i++)
+        {
+               cout<<"arr["<<i<<"]:"<<arr[i]<<endl;
+        }
+    }
+    return 0;
+}
